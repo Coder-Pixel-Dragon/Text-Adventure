@@ -33,7 +33,7 @@ class Command:
             print("Which treasure do you want to take?")
             print(str(" or".join(current_treasure.split(','))))
             # Takes user input of which treasure they want
-            treasure = input(">>> ")
+            treasure = input(">>> ").lower()
 
             # If there is treasure in the current_treasure variable
             if treasure in current_treasure:
@@ -96,7 +96,7 @@ class Command:
 
         print(str(inventory).join(", "))
         print("Which item would you like to drop?")
-        item = input(">>> ")
+        item = input(">>> ").lower()
 
         if item in str(inventory):
             inventory.remove(item)

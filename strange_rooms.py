@@ -2,40 +2,6 @@ from room_information import Rooms
 from initialize import Preload
 from game_commands import Command
 
-# method drops an item from inventory
-def drop_item(inventory, count, item, move):
-    try:
-        # if the length of command is 2 words,
-        if len(move) == 2:
-            # add the item in command[1] to the item variable
-            item = move[1]
-            # removes the item from the inventory list
-            inventory.remove(item)
-            print("You have dropped " + item + ".")
-        # if the length of command is 3 words,
-        if len(move) == 3:
-            # add the item in command[1] and command[2] to the item variable
-            item = move[1] + " " + move[2]
-            # removes the item from the inventory list
-            inventory.remove(item)
-            print("You have dropped " + item + ".")
-        # if the length of command is 4 words,
-        if len(move) == 4:
-            # add the item in command[1], command[2] and command[3] to the item variable
-            item = move[1] + " " + move[2] + " " + move[3]
-            # removes the item from the inventory list
-            inventory.remove(item)
-            print("You have dropped " + item + ".")
-        # if the length of command is 5 words,
-        if len(move) == 5:
-            # add the item in command [1], command[2], command[3] and command[4] to the item variable
-            item = move[1] + " " + move[2] + " " + move[3] + " " + move[4]
-            # removes the item from the inventory list
-            inventory.remove(item)
-            print("You have dropped " + item + ".")
-    except:
-        print("You don't have that item in your inventory.")
-
 
 # >>>>>>>>>>>> MAIN PROGRAM <<<<<<<<<<<<<<<<
 
