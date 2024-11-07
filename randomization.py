@@ -4,15 +4,18 @@ from room_information import Rooms
 
 # Randomizes how many rooms get treasures as well as randomizing
 # treasures for each room
+def get_treasure_list():
+    treasure_list = ["sword", "sword", "sword", "stuffed animal", "pool noodle", "spork"]
+    return treasure_list
 class Randomize:
 
-    @staticmethod
     def treasure_chests():
         # Initialize rooms information
         all_rooms = Rooms().house_rooms
+        all_treasures = get_treasure_list()
 
         # List of treasures to be found in treasure chests
-        treasure = ["sword", "spear", "battle axe", "stuffed animal", "pool noodle", "spork"]
+        treasure = ["sword", "spear", "axe", "stuffed animal", "pool noodle", "spork"]
         # Sets count at one for while loop
         count = 1
 
@@ -21,8 +24,8 @@ class Randomize:
         while count != 6:
             # Randomizes the room(s) for items to go in
             random_room = random.choice(all_rooms)
-            # Randomizes items in the room
-            random_treasure = random.choice(treasure)
+            # Randomizes items in the room      
+            random_treasure = random.choice(all_treasures)
 
             # If there is no item in the room adds item to the room
             if random_room["treasure"]:
@@ -33,7 +36,6 @@ class Randomize:
             # Increases count by one for while loop
             count += 1
 
-    @staticmethod
     def items():
         # Initialize rooms information
         all_rooms = Rooms().house_rooms

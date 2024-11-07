@@ -1,20 +1,26 @@
+from randomization import get_treasure_list
 from room_information import Rooms
 from menu import Instructions
-
 
 class Command:
     @staticmethod
     # Method to move from room to room
     # Direction is the direction from user and room is the current room
     def go(direction, room):
-            # If the direction is in the current room's direction key
-            if direction[1] in Rooms.house_rooms[room]:
-                # Variable room will now contain the room being moved to
-                room = Rooms.house_rooms[room][direction[1]]
+        if direction[0] == "go":
+            # Detects length of command to make sure a direction was selected
+            if len(direction) > 1:
+                # If the direction is in the current room's direction key
+                if direction[1] in Rooms.house_rooms[room]:
+                    # Variable room will now contain the room being moved to
+                    room = Rooms.house_rooms[room][direction[1]]       
+                else:
+                    print("You can't go that way.\n")
             else:
-                print("You can't go that way\n")
-            # Returns the room moved to
-            return room
+                print("You need to pick a direction.\n")
+
+        # Returns the room moved to
+        return room
 
     @staticmethod
     # Method to reprint instructions
@@ -68,27 +74,28 @@ class Command:
     # Item is the user's input, room is the current room and inventory is the user's inventory
     def get(item, room, inventory):
         # Set current_item to the current_room's item
-        current_item = Rooms.house_rooms[room]["item"]
+        current_item = Rooms.house_rooms[room]["item"].lower()
+        
         # Takes the command "get" out of the list
-        item[0] = ""
+        item.pop(0)
         # Joins list into string for comparison
-        item = " ".join(item).lstrip()
+        user_item = " ".join(item).lstrip()
+
         # If the length of item is 2 words and item[1] is in the room's item list
-        if item in current_item:
+        if user_item in current_item:
+            # Capitalize word before appending
+            cap_item = user_item.title()
             # Append the current room's item to the inventory
-            inventory.append(item)
+            inventory.append(cap_item)
             # Print out results to user
-            print("You've found " + str(item) + "!")
+            print("You've found " + str(cap_item) + "!")
             # Removes the item from the room
             Rooms.house_rooms[room]["item"] = ""
-
-            return inventory
 
         # Prints an error message to the user
         else:
             print("That item is not in this room.")
-
-            return inventory
+        return inventory
 
     @staticmethod
     # method drops an item from inventory
@@ -107,3 +114,43 @@ class Command:
             print("You don't have that item in your inventory.")
 
             return inventory
+
+    @staticmethod
+    def use(inventory):
+        print(str(inventory).join(", "))
+        print("Which item would you like to use?")
+        item = input(">>> ").lower()
+        
+        if item in str(inventory).lower():
+            
+            capItem = item.title()
+            
+            print("Use " + capItem + " on what?")
+            selectedTarget = input(">>> ").lower()
+            
+            for target in Rooms.house_rooms[0]["targets"]:
+                if target["name"] == selectedTarget:
+                    if "destroy" in Rooms.house_rooms[0]["targets"]:
+                       
+                        print("You killed the " + selectedTarget.title() + " with the " + item + ".")
+                    else:
+                        print("The " + item + " has no effect.")
+                   # print(f"You selected {target['name'].title()}, {target['description']}")
+            
+        else:
+            print("You don't have that item in your inventory.")    
+            
+            
+        return inventory
+
+    @staticmethod
+    def can_destroy_target(target_name, room):
+        for target in Rooms.house_rooms[room]["targets"]:
+            if target["name"] == target_name and "destroy" in target:
+                return target["destroy"]
+        return None
+
+    def iterate_room_names(room_index):
+
+        for target in Rooms.house_rooms[room_index]["targets"]:
+            print(target["name"])

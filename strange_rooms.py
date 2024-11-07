@@ -29,14 +29,14 @@ while True:
         print("There is a treasure chest in this room.")
 
     # This variable holds the commands and information needed
-    command = input(">>> ").lower().split()
+    command = input(">>> ").lower().split(' ',1)
 
     # >>>>>>>>>>>> COMMANDS <<<<<<<<<<<<<<<<
     # COMMAND "GO"
     if command[0] == "go":
         # Calls the go command which returns the room that the user is moving to
         current_room = Command.go(command, current_room)
-
+        
     # COMMAND "GET"
     # Gets an item from the room
     if command[0] == "get":
@@ -62,16 +62,17 @@ while True:
     if command[0] == "drop":
         Command.drop(inventory)
 
-    # If the input is not a command
-    if command[0]:
-        print("That is not a command. If you need to see the\n"
-              "commands again, type \"?\".")
-
+    #COMMAND "USE"
+    if command[0] == "use":
+        Command.use(inventory)
 
 # TO DO:
 # - CREATE "USE" COMMAND
-# - MAKE BASE CLASS FOR HERO AND ENEMIES
-#   - MAKE HERO STATS/MAKE ENEMY STATS
-# - MAKE BATTLE SYSTEM
+# - CREATE "PUSH" COMMAND
+# - CREATE "PULL" COMMAND
+# - CREATE "TURN" COMMAND
+# - CREATE CHARACTER CUSTOMIZATION
+# - CREATE ENVIRONMENTAL PUZZLES
+# - CREATE JOURNAL SYSTEM
 
 

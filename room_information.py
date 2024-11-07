@@ -1,7 +1,10 @@
 class Rooms:
     # this is the room information, each given a reference number then given keys for the info values
-    house_rooms = {0: {"name": "foyer", "description": "A place to greet people.", "item": None,
-                       "treasure": None, "north": 3},
+    rooms = {0: {"name": "foyer", "description": "A place to greet people.", "item": None,
+                       "treasure": None, "north": 3, "targets": [
+                                {"name": "orc", "description": "A big, smelly brute.", "destroy": "sword",},
+                                {"name": "goblin", "description": "A small, sneaky sneak", "destroy": "pool noodle"}
+                                                    ]},
              1: {"name": "living room", "description": "A place to sit.", "item": None, "treasure": None,
                  "north": 4, "east": 3, "west": 5},
              2: {"name": "dining room", "description": "A place to eat.", "item": None, "treasure": None,
