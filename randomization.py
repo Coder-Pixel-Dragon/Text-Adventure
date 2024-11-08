@@ -1,5 +1,5 @@
 import random
-from room_information import Rooms
+from room_information import Mansion
 
 # Randomizes how many rooms get treasures as well as randomizing
 # treasures for each room
@@ -23,7 +23,7 @@ item_probabilities = {
 
 # Initialize rooms information
 def treasure_chests():
-    all_rooms = Rooms().rooms
+    all_rooms = Mansion().rooms
     for room_key, room_data in all_rooms.items():
         if isinstance(room_data, dict) and "treasure" in room_data:
             # Force room_data["treasure"] to be a list
@@ -36,11 +36,10 @@ def treasure_chests():
             for treasure, probability in treasure_probabilities.items():
                 if random.random() < probability:
                     room_data["treasure"].append(treasure)
-            room_data["treasure"] = ", ".join(room_data["treasure"])
             
 def items():
     # Initialize rooms information
-    all_rooms = Rooms().rooms
+    all_rooms = Mansion().rooms
 
     for room in all_rooms.values():
         # Allows only one item per room

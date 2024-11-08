@@ -1,11 +1,11 @@
-class Rooms:
+class Mansion:
     # this is the room information
     rooms = {
         "foyer": {
         "name": "foyer",
         "description": "A place to greet people.",
         "item": None,
-        "treasure": None,
+        "treasure": [],
         "exits":
             {
             "north": "hallway",
@@ -24,7 +24,7 @@ class Rooms:
             "name": "living room",
             "description": "A place to sit.",
             "item": None,
-            "treasure": None,
+            "treasure": [],
             "exits":
                 {
                     "north": "kitchen",
@@ -46,7 +46,7 @@ class Rooms:
             "name": "dining room",
             "description": "A place to eat.",
             "item": None,
-            "treasure": None,
+            "treasure": [],
             "exits":
                 {
                     "west": "kitchen",
@@ -65,7 +65,7 @@ class Rooms:
             "name": "hallway",
             "description": "The hallway has many doors, dusty and old, beckoning you to explore.",
             "item": None,
-            "treasure": None,
+            "treasure": [],
             "exits":
                 {
                     "north": "kitchen",
@@ -84,7 +84,7 @@ class Rooms:
             "name": "kitchen",
             "description": "A fully furnished kitchen is laid out in front of you",
             "item": None,
-            "treasure": None,
+            "treasure": [],
             "exits":
                 {
                     "east": "dining room",
@@ -105,7 +105,7 @@ class Rooms:
             "name": "bathroom ",
             "description": "Oddly out of place, you find the bathroom clean and lacking dust. Conveniently, there's a toilet here. ",
             "item": None,
-            "treasure": None,
+            "treasure": [],
             "exits":
                 {
                     "east": "living room",

@@ -1,6 +1,6 @@
 from game_commands import Command
 from initialize import Preload
-from room_information import Rooms
+from room_information import Mansion
 
 # >>>>>>>>>>>> MAIN PROGRAM <<<<<<<<<<<<<<<<
 
@@ -16,15 +16,15 @@ Preload()
 while True:
 
     # Prints the name and description of the current room
-    print("\nThis is the " + Rooms.rooms[current_room]["name"])
-    print(Rooms.rooms[current_room]["description"])
+    print("\nThis is the " + Mansion.rooms[current_room]["name"])
+    print(Mansion.rooms[current_room]["description"])
 
     # This checks if there is an item in the current room
-    if Rooms.rooms[current_room]["item"]:
-        print("There is a \"" + Rooms.rooms[current_room]["item"] + "\" in this room.")
+    if Mansion.rooms[current_room]["item"]:
+        print("There is a \"" + Mansion.rooms[current_room]["item"] + "\" in this room.")
 
     # This checks if there is treasure in the current room
-    if Rooms.rooms[current_room]["treasure"]:
+    if Mansion.rooms[current_room]["treasure"]:
         print("There is a treasure chest in this room.")
 
     # This variable holds the commands and information needed
@@ -63,7 +63,7 @@ while True:
 
     # COMMAND "USE"
     if command[0] == "use":
-        Command.use(inventory)
+        Command.use(inventory, current_room)
 
 # TO DO:
 # - CREATE "PUSH" COMMAND
