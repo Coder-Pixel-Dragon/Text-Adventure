@@ -1,12 +1,11 @@
-from room_information import Rooms
-from initialize import Preload
 from game_commands import Command
-
+from initialize import Preload
+from room_information import Rooms
 
 # >>>>>>>>>>>> MAIN PROGRAM <<<<<<<<<<<<<<<<
 
 # Start player in room 0
-current_room = 0
+current_room = "foyer"
 # Inventory list will hold inventory items
 inventory = []
 
@@ -17,26 +16,26 @@ Preload()
 while True:
 
     # Prints the name and description of the current room
-    print("\nThis is the " + Rooms.house_rooms[current_room]["name"])
-    print(Rooms.house_rooms[current_room]["description"])
+    print("\nThis is the " + Rooms.rooms[current_room]["name"])
+    print(Rooms.rooms[current_room]["description"])
 
     # This checks if there is an item in the current room
-    if Rooms.house_rooms[current_room]["item"]:
-        print("There is a \"" + Rooms.house_rooms[current_room]["item"] + "\" in this room.")
+    if Rooms.rooms[current_room]["item"]:
+        print("There is a \"" + Rooms.rooms[current_room]["item"] + "\" in this room.")
 
     # This checks if there is treasure in the current room
-    if Rooms.house_rooms[current_room]["treasure"]:
+    if Rooms.rooms[current_room]["treasure"]:
         print("There is a treasure chest in this room.")
 
     # This variable holds the commands and information needed
-    command = input(">>> ").lower().split(' ',1)
+    command = input(">>> ").lower().split(' ', 1)
 
     # >>>>>>>>>>>> COMMANDS <<<<<<<<<<<<<<<<
     # COMMAND "GO"
     if command[0] == "go":
         # Calls the go command which returns the room that the user is moving to
         current_room = Command.go(command, current_room)
-        
+
     # COMMAND "GET"
     # Gets an item from the room
     if command[0] == "get":
@@ -62,17 +61,14 @@ while True:
     if command[0] == "drop":
         Command.drop(inventory)
 
-    #COMMAND "USE"
+    # COMMAND "USE"
     if command[0] == "use":
         Command.use(inventory)
 
 # TO DO:
-# - CREATE "USE" COMMAND
 # - CREATE "PUSH" COMMAND
 # - CREATE "PULL" COMMAND
 # - CREATE "TURN" COMMAND
 # - CREATE CHARACTER CUSTOMIZATION
 # - CREATE ENVIRONMENTAL PUZZLES
 # - CREATE JOURNAL SYSTEM
-
-

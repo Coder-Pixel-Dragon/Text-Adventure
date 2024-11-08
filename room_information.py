@@ -1,5 +1,5 @@
 class Rooms:
-    # this is the room information, each given a reference number then given keys for the info values
+    # this is the room information
     rooms = {
         "foyer": {
         "name": "foyer",
@@ -93,13 +93,28 @@ class Rooms:
                         {"name": "drawers", # ****stopped here. insert targets!!!****
                          "description": "As you shuffle through junk drawers, you find an ornate key.",
                          "take": "ornate key",},
-                        {"name": "coffee table",
+                        {"name": "stove",
+                         "description": "You see a pot on the stove with a lid. It's curiously painted your favorite color, ",
+                         "open": "pot lid"
                          }
                     ]
                 }
             },
-             4: {"name": "kitchen", "description": "A place to cook food", "item": None, "treasure": None,
-                 "east": 2, "south": 1},
-             5: {"name": "bathroom", "description": "You can use the bathroom here.", "item": None,
-                 "treasure": None, "east": 1}
-             }
+
+        "bathroom": {
+            "name": "bathroom ",
+            "description": "Oddly out of place, you find the bathroom clean and lacking dust. Conveniently, there's a toilet here. ",
+            "item": None,
+            "treasure": None,
+            "exits":
+                {
+                    "east": "living room",
+                    "targets": [
+                        {"name": "toilet",
+                         "description": "It looks like it has a comfortable seat.",
+                         "use": "toilet"
+                         }
+                    ]
+                }
+        }   
+    }

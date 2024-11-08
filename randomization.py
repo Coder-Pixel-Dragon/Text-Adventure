@@ -1,69 +1,54 @@
 import random
 from room_information import Rooms
 
-
 # Randomizes how many rooms get treasures as well as randomizing
 # treasures for each room
-def get_treasure_list():
-    treasure_list = ["sword", "sword", "sword", "stuffed animal", "pool noodle", "spork"]
-    return treasure_list
-class Randomize:
 
-    def treasure_chests():
-        # Initialize rooms information
-        all_rooms = Rooms().house_rooms
-        all_treasures = get_treasure_list()
+# Percentages for what kind of treasure will be placed
+treasure_probabilities = {
+    "sword": 0.25,          #25% chance
+    "axe": 0.15,            #15% chance
+    "spear": 0.20,          #20% chance
+    "stuffed animal": 0.1,  #10% chance
+    "pool noodle": 0.1,     #10% chance
+    "spork": 0.2            #20% chance  
+}
 
-        # List of treasures to be found in treasure chests
-        treasure = ["sword", "spear", "axe", "stuffed animal", "pool noodle", "spork"]
-        # Sets count at one for while loop
-        count = 1
+item_probabilities = {
+    "Null Bat": 0.2,                #20% chance
+    "Star Hammer": 0.25,            #25% chance
+    "Crusty Barnacle": 0.30,        #30% chance
+    "Crystal Ball of Doom": 0.25    #25% chance
+}
 
-        # Places treasure chests between 1 and 6 different rooms. Sometimes
-        # rooms may come up more than once
-        while count != 6:
-            # Randomizes the room(s) for items to go in
-            random_room = random.choice(all_rooms)
-            # Randomizes items in the room      
-            random_treasure = random.choice(all_treasures)
-
-            # If there is no item in the room adds item to the room
-            if random_room["treasure"]:
-                random_room["treasure"] += str(", " + random_treasure)
-            else:
-                # Else random_treasure is saved to the random room treasure list
-                random_room["treasure"] = random_treasure
-            # Increases count by one for while loop
-            count += 1
-
-    def items():
-        # Initialize rooms information
-        all_rooms = Rooms().house_rooms
-
-        # List of items to be found in random rooms
-        item = ["Crystal Ball of Doom", "Star Hammer", "Null Bat", "Crusty Barnacle"]
-        # Room item will hold a list of current room items
-        room_item = []
-        # Sets count at one for while loop
-        count = 1
-
-        # Places treasure chests in 3 different rooms. Sometimes
-        # rooms may come up more than once
-        while count != 4:
-            # Randomizes the room(s) for items to go in
-            random_room = random.choice(all_rooms)
-            # Randomizes items in the room
-            random_item = random.choice(item)
-
-            # Is used to keep duplicate items out of the current_room's item list
-            if random_item not in room_item:
-                # Appends item to list to keep track of items for comparison
-                room_item.append(random_item)
-
-                # If there is no item in the room adds item to the room
-                if random_room["item"] != random_item:
-                    random_room["item"] = random_item
+# Initialize rooms information
+def treasure_chests():
+    all_rooms = Rooms().rooms
+    for room_key, room_data in all_rooms.items():
+        if isinstance(room_data, dict) and "treasure" in room_data:
+            # Force room_data["treasure"] to be a list
+            if not isinstance(room_data["treasure"], list):
+                if isinstance(room_data["treasure"], str):
+                    room_data["treasure"] = room_data["treasure"].split(", ")
                 else:
-                    pass
-                # Increases count by one for while loop
-                count += 1
+                    room_data["treasure"] = []
+
+            for treasure, probability in treasure_probabilities.items():
+                if random.random() < probability:
+                    room_data["treasure"].append(treasure)
+            room_data["treasure"] = ", ".join(room_data["treasure"])
+            
+def items():
+    # Initialize rooms information
+    all_rooms = Rooms().rooms
+
+    for room in all_rooms.values():
+        # Allows only one item per room
+        room["item"] = None
+        # Item and probability are two variables used in the for loop
+        for item, probability in item_probabilities.items():
+            if random.random() < probability:
+                room["item"] = item
+                # Only assign one item
+                break
+      
